@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <?php
-// This snippet will print out all of the post titles in the DevDungeon.com archive.
-require_once('scrap/simple_html_dom.php'); // Get simple_html_dom.php from http://simplehtmldom.sourceforge.net/
 
-$target_url = 'https://www.nativeindonesia.com/category/wisata/';
+// This snippet will print out all of the post titles in the DevDungeon.com archive.
+include_once('scrap/simple_html_dom.php'); // Get simple_html_dom.php from http://simplehtmldom.sourceforge.net/
+set_time_limit(0);
+
+$input= $_POST['lokasi'];
+$lokasi = str_replace(" ", "+", $input);
+$target_url = 'https://www.nativeindonesia.com/?s='.$lokasi;
 
 $curl = curl_init(); 
 curl_setopt($curl, CURLOPT_URL, $target_url);  
@@ -13,6 +17,7 @@ curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
 $html = curl_exec($curl);  
 curl_close($curl);  
 
+// $html = new simple_html_dom();
 $html= str_get_html($html);
 ?>
 <head>
@@ -29,7 +34,7 @@ $html= str_get_html($html);
 	<!-- meta character set -->
 	<meta charset="UTF-8">
 	<!-- Site Title -->
-	<title>Artikel Wisata</title>
+	<title>Search Artikel <?php echo $input?></title>
 
 	<!--
 			Google Font
