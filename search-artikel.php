@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <?php
-
 // This snippet will print out all of the post titles in the DevDungeon.com archive.
 include_once('scrap/simple_html_dom.php'); // Get simple_html_dom.php from http://simplehtmldom.sourceforge.net/
 set_time_limit(0);
-
-$input= $_POST['lokasi'];
+$input= $_GET['lokasi'];
 $lokasi = str_replace(" ", "+", $input);
 $target_url = 'https://www.nativeindonesia.com/?s='.$lokasi;
-
 $curl = curl_init(); 
 curl_setopt($curl, CURLOPT_URL, $target_url);  
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);  
 curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);  
 $html = curl_exec($curl);  
 curl_close($curl);  
-
 // $html = new simple_html_dom();
 $html= str_get_html($html);
 ?>
@@ -180,7 +176,7 @@ $html= str_get_html($html);
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 posts-list">
-				<?php for($i = 0; $i <= 7; $i++){?>
+				<?php for($i = 0; $i <= 10; $i++){?>
 					<div class="single-post row">
 						<div class="col-lg-3  col-md-3 meta-details">
 							<ul class="tags">
@@ -241,8 +237,8 @@ $html= str_get_html($html);
 				<div class="col-lg-4 sidebar-widgets">
 					<div class="widget-wrap">
 						<div class="single-sidebar-widget search-widget">
-							<form class="search-form" action="#">
-								<input placeholder="Search Posts" name="search" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'">
+							<form class="search-form" action="search-artikel.php" method="GET">
+								<input placeholder="Mau ke Mana?" name="lokasi" type="text">
 								<button type="submit"><i class="fa fa-search"></i></button>
 							</form>
 						</div>
@@ -251,9 +247,9 @@ $html= str_get_html($html);
 							<?php for($i = 0; $i < 3; $i++){?>
 								<?php foreach ($html->find(".site-main") as $archiveLink) {?>
 									<?php 	$judul = $archiveLink->find(".entry-title a",$i)->plaintext;
-											$link = $archiveLink->find(".entry-title a",$i)->href;
-											$img = $archiveLink->find(".attachment-full",$i)->src;
-											$isi = $archiveLink->find(".entry-summary p text",$i)->plaintext; ?>
+										$link = $archiveLink->find(".entry-title a",$i)->href;
+										$img = $archiveLink->find(".post-image img",$i)->src;
+										$isi = $archiveLink->find(".entry-summary p",$i)->plaintext; ?>
 							<div class="popular-post-list">
 								<div class="single-post-list d-flex flex-row align-items-center">
 									<div class="thumb">
@@ -261,7 +257,7 @@ $html= str_get_html($html);
 									</div>
 									<div class="details">
 										<a href="<?php echo $link?>"><h6><?php echo $judul?></h6></a>
-										
+
 									</div>
 								</div>
 							</div>

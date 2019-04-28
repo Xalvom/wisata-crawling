@@ -58,7 +58,7 @@ $html= str_get_html($html);
 		<div class="container">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="index.html"><img src="img/icon.png" alt="" title="" /></a>
+					<a href="index.html"><img src="img/icon-nav.png" width="80%" alt="" title="" /></a>
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
@@ -175,36 +175,36 @@ $html= str_get_html($html);
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 posts-list">
-				<?php for($i = 0; $i <= 7; $i++){?>
+				<?php for($i = 0; $i <= 10; $i++){?>
 					<div class="single-post row">
-						<div class="col-lg-3  col-md-3 meta-details">
+						<!--<div class="col-lg-3  col-md-3 meta-details">
 							<ul class="tags">
 								<li><a href="#">Food,</a></li>
 								<li><a href="#">Technology,</a></li>
 								<li><a href="#">Politics,</a></li>
 								<li><a href="#">Lifestyle</a></li>
 							</ul>
-							<div class="user-details row">
+							 <div class="user-details row">
 								<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">Mark wiens</a> <span class="lnr lnr-user"></span></p>
 								<p class="date col-lg-12 col-md-12 col-6"><a href="#">12 Dec, 2017</a> <span class="lnr lnr-calendar-full"></span></p>
 								<p class="view col-lg-12 col-md-12 col-6"><a href="#">1.2M Views</a> <span class="lnr lnr-eye"></span></p>
 								<p class="comments col-lg-12 col-md-12 col-6"><a href="#">06 Comments</a> <span class="lnr lnr-bubble"></span></p>
-							</div>
-						</div>
+							</div> 
+						</div>-->
 							<?php foreach ($html->find(".site-main") as $archiveLink) {?>
 								<?php 	$judul = $archiveLink->find(".entry-title a",$i)->plaintext;
 										$link = $archiveLink->find(".entry-title a",$i)->href;
 										$img = $archiveLink->find(".post-image img",$i)->src;
 										$isi = $archiveLink->find(".entry-summary p",$i)->plaintext; ?>
-						<div class="col-lg-9 col-md-9 ">
+						<div class="col-lg-12 col-md-12 ">
 							<div class="feature-img">
 								<img class="img-fluid" src="<?php echo $img ?>" alt="">
 							</div>
 							<a class="posts-title" href="<?php echo $link?>"><h3><?php echo $judul?></h3></a>
-							<p class="excert">
+							<p class="excert text-justify">
 								<?php echo $isi ?>
 							</p>
-							<a href="<?php echo $link?>" class="primary-btn">Read More</a>
+							<a href="<?php echo $link?>" target="_blank" class="primary-btn">Selengkapnya</a>
 						</div>
 					</div>
 							<?php } ?>
@@ -222,7 +222,7 @@ $html= str_get_html($html);
 							<li class="page-item"><a href="#" class="page-link">02</a></li>
 							<li class="page-item"><a href="#" class="page-link">03</a></li>
 							<li class="page-item"><a href="#" class="page-link">04</a></li>
-							<li class="page-item"><a href="#" class="page-link">09</a></li>
+							<li class="page-item"><a href="#" class="page-link">05</a></li>
 							<li class="page-item">
 								<a href="#" class="page-link" aria-label="Next">
 									<span aria-hidden="true">
@@ -246,9 +246,9 @@ $html= str_get_html($html);
 							<?php for($i = 0; $i < 3; $i++){?>
 								<?php foreach ($html->find(".site-main") as $archiveLink) {?>
 									<?php 	$judul = $archiveLink->find(".entry-title a",$i)->plaintext;
-											$link = $archiveLink->find(".entry-title a",$i)->href;
-											$img = $archiveLink->find(".attachment-full",$i)->src;
-											$isi = $archiveLink->find(".entry-summary p text",$i)->plaintext; ?>
+										$link = $archiveLink->find(".entry-title a",$i)->href;
+										$img = $archiveLink->find(".attachment-full",$i)->src;
+										$isi = $archiveLink->find(".entry-summary p",$i)->plaintext; ?>
 							<div class="popular-post-list">
 								<div class="single-post-list d-flex flex-row align-items-center">
 									<div class="thumb">
