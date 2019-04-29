@@ -1,11 +1,5 @@
-<head>
-	<link rel="stylesheet" type="text/css" href="csstyle.css">
-</head>
-<div class="encapsulation">
-
 <?php
-   session_start();
-   require_once("koneksi.php");
+   require_once("../koneksi.php");
    $judul = $_POST['judul'];
    $lokasi = $_POST['lokasi'];   
    $kategori = $_POST['kategori'];   
@@ -18,11 +12,14 @@
        $data = "INSERT INTO tbl_artikel VALUES (NULL, '$judul', '$lokasi', '$kategori', '$textArtikel')";
        $simpan = $db->query($data);
        if($simpan) {
-         echo "Proses erhasil";
-       } else {
-         echo "<div align='center'>Proses Gagal!</div>";
-       }
-     }
-?>
-
-</div>
+         ?>
+		 <script language='javascript'> 
+					window.alert('Proses Berhasil'); 
+		 </script>
+		<?php   } else { ?>
+		<script language='javascript'> 
+					window.alert('Proses Gagal'); 
+		 </script>
+      <?php } } ?>
+<script language = "JavaScript">
+document.location = 'tambahartikel.php'</script>

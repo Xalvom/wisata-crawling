@@ -648,10 +648,10 @@ td, th {
     #back-top {
       right: 5px; } }
   #back-top a {
-    background: url(../img/rocket.png) no-repeat;
+    background: url(../img/plane.png) no-repeat;
     background-size: 95% 80%;
-    width: 50px;
-    height: 116px;
+    width: 100px;
+    height: 100px;
     display: block; }
     @media (max-width: 768px) {
       #back-top a {
@@ -1875,7 +1875,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .banner-area {
   background: url(../img/banner-bg.png) no-repeat top center;
   background-size: cover;
-  min-height: 512px; }
+  min-height: 300px; }
 
 @media (max-width: 991px) {
   .about-area .about-left {
