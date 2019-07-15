@@ -15,6 +15,21 @@ curl_close($curl);
 
 $html= str_get_html($html);
 ?>
+<?php
+// This snippet will print out all of the post titles in the DevDungeon.com archive.
+include_once('scrap/simple_html_dom.php'); // Get simple_html_dom.php from http://simplehtmldom.sourceforge.net/
+// set_time_limit(0);
+
+$target_url = 'https://pesona.travel/agenda/';
+$curl = curl_init(); 
+curl_setopt($curl, CURLOPT_URL, $target_url);  
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);  
+curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);  
+$pesona = curl_exec($curl);  
+curl_close($curl);  
+// $html = new simple_html_dom();
+$pesona= str_get_html($pesona);
+?>
 <head>
 	<!-- Mobile Specific Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -115,12 +130,12 @@ $html= str_get_html($html);
 					<div class="single-cat-widget">
 						<div class="content relative">
 							<div class="overlay overlay-bg"></div>
-							<a href="search-artikel.php?lokasi=jawa+barat" target="_blank">
+							<a href="search-artikel.php?lokasi=bandung" target="_blank">
 								<div class="thumb">
 									<img class="content-image img-fluid d-block mx-auto" src="img/rekomendasi/sampokongchengho.jpg" alt="">
 								</div>
 								<div class="content-details">
-									<h4 class="content-title mx-auto text-uppercase">Jawa Barat</h4>
+									<h4 class="content-title mx-auto text-uppercase">Bandung</h4>
 									<span></span>
 									<!-- <p>Enjoy your social life together</p> -->
 								</div>
@@ -132,12 +147,12 @@ $html= str_get_html($html);
 					<div class="single-cat-widget">
 						<div class="content relative">
 							<div class="overlay overlay-bg"></div>
-							<a href="search-artikel.php?lokasi=jawa+tengah" target="_blank">
+							<a href="search-artikel.php?lokasi=semarang" target="_blank">
 								<div class="thumb">
 									<img class="content-image img-fluid d-block mx-auto" src="img/rekomendasi/lawangsewu.jpg" alt="">
 								</div>
 								<div class="content-details">
-									<h4 class="content-title mx-auto text-uppercase">Jawa Tengah</h4>
+									<h4 class="content-title mx-auto text-uppercase">Semarang</h4>
 									<span></span>
 									<!-- <p>Be a part of politics</p> -->
 								</div>
@@ -149,12 +164,12 @@ $html= str_get_html($html);
 					<div class="single-cat-widget">
 						<div class="content relative">
 							<div class="overlay overlay-bg"></div>
-							<a href="search-artikel.php?lokasi=jawa+timur" target="_blank">
+							<a href="search-artikel.php?lokasi=surabaya" target="_blank">
 								<div class="thumb">
 									<img class="content-image img-fluid d-block mx-auto" src="img/rekomendasi/masjidagungjawatengah.jpg" alt="">
 								</div>
 								<div class="content-details">
-									<h4 class="content-title mx-auto text-uppercase">Jawa Timur</h4>
+									<h4 class="content-title mx-auto text-uppercase">Surabaya</h4>
 									<span></span>
 									<!-- <p>Let the food be finished</p> -->
 								</div>
@@ -172,50 +187,51 @@ $html= str_get_html($html);
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 posts-list">
-				<?php for($i = 0; $i < 7; $i++){?>
-					<div class="single-post row">
-						
-							<?php foreach ($html->find(".site-main") as $archiveLink) {?>
-								<?php 	$judul = $archiveLink->find(".entry-title a",$i)->plaintext;
-										$link = $archiveLink->find(".entry-title a",$i)->href;
-										$img = $archiveLink->find(".post-image img",$i)->src;
-										$isi = $archiveLink->find(".entry-summary p",$i)->plaintext; ?>
-						<div class="col-lg-12 col-md-12 ">
-							<div class="feature-img">
-								<img class="img-fluid" src="<?php echo $img ?>" alt="">
-							</div>
-							<a class="posts-title" href="<?php echo $link?>"><h3><?php echo $judul?></h3></a>
-							<p class="excert text-justify">
-								<?php echo $isi ?>
-							</p>
-							<a href="<?php echo $link?>" target="_blank" class="primary-btn">Selengkapnya</a>
-						</div>
-					</div>
+				<div class="row">
+					<?php for($i = 0; $i < 6; $i++){?>
+						<?php foreach ($html->find(".site-main") as $archiveLink) {
+								 	$judul = $archiveLink->find(".entry-title a",$i)->plaintext;
+									$link = $archiveLink->find(".entry-title a",$i)->href;
+									$img = $archiveLink->find(".post-image img",$i)->src;
+									$isi = $archiveLink->find(".entry-summary p",$i)->plaintext; ?>
+									<div class="card col-lg-6 col-sm-12 mb-3">
+										<img src="<?php echo $img ?>" class="card-img-top" alt="...">
+										<div class="card-body">
+											<a class="posts-title" href="artikel-native.php?artikel=<?php echo $link ?>">
+												<h5 class="card-title"><?php echo $judul?></h5>
+											</a>
+											<p class="card-text text-primary font-weight-bold">nativeindonesia.com</p>
+											<p class="card-text text-justify"><?php echo $isi ?></p>
+										</div>
+										<div class="card-footer text-center">
+											<a href="artikel-native.php?artikel=<?php echo $link ?>" class="primary-btn">Selengkapnya</a>
+										</div>
+									</div>
 							<?php } ?>
 						<?php } ?>
-					<nav class="blog-pagination justify-content-center d-flex">
-						<ul class="pagination">
-							<li class="page-item">
-								<a href="#" class="page-link" aria-label="Previous">
-									<span aria-hidden="true">
-										<span class="lnr lnr-chevron-left"></span>
-									</span>
-								</a>
-							</li>
-							<li class="page-item active"><a href="#" class="page-link">01</a></li>
-							<li class="page-item"><a href="#" class="page-link">02</a></li>
-							<li class="page-item"><a href="#" class="page-link">03</a></li>
-							<li class="page-item"><a href="#" class="page-link">04</a></li>
-							<li class="page-item"><a href="#" class="page-link">05</a></li>
-							<li class="page-item">
-								<a href="#" class="page-link" aria-label="Next">
-									<span aria-hidden="true">
-										<span class="lnr lnr-chevron-right"></span>
-									</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
+					</div>
+				
+				<div class="row">
+					<?php for($i = 0; $i < 4; $i++){?>
+							<?php foreach ($pesona->find(".postList") as $archiveLink) {
+									 	$judul = $archiveLink->find(".list_item h5",$i)->plaintext;
+										$link = $archiveLink->find(".list_item a",$i)->href;
+										$img = $archiveLink->find(".agenda-list-box img",$i)->src; ?>
+									<div class="card col-lg-6 col-sm-12 mb-3">
+										<img src="<?php echo $img ?>" class="card-img-top" alt="...">
+										<div class="card-body">
+											<a class="posts-title" href="artikel-pesona.php?artikel=<?php echo $link ?>">
+												<h5 class="card-title"><?php echo $judul?></h5>
+											</a>
+											<p class="card-text text-primary font-weight-bold">pesona.travel</p>
+										</div>
+										<div class="card-footer text-center">
+											<a href="artikel-pesona.php?artikel=<?php echo $link ?>" class="primary-btn">Selengkapnya</a>
+										</div>
+									</div>
+							<?php } ?>
+						<?php } ?>
+					</div>		
 				</div>
 				<div class="col-lg-4 sidebar-widgets">
 					<div class="widget-wrap">
@@ -231,7 +247,7 @@ $html= str_get_html($html);
 								<?php foreach ($html->find(".site-main") as $archiveLink) {?>
 									<?php 	$judul = $archiveLink->find(".entry-title a",$i)->plaintext;
 										$link = $archiveLink->find(".entry-title a",$i)->href;
-										$img = $archiveLink->find(".attachment-full",$i)->src;
+										$img = $archiveLink->find(".post-image img",$i)->src;
 										$isi = $archiveLink->find(".entry-summary p",$i)->plaintext; ?>
 							<div class="popular-post-list">
 								<div class="single-post-list d-flex flex-row align-items-center">
@@ -239,16 +255,13 @@ $html= str_get_html($html);
 										<img class="img-fluid" src="<?php echo $img ?>" alt="">
 									</div>
 									<div class="details">
-										<a href="<?php echo $link?>"><h6><?php echo $judul?></h6></a>
-										
+										<a href="artikel-native.php?artikel=<?php echo $link ?>"><h6><?php echo $judul?></h6></a>
+
 									</div>
 								</div>
 							</div>
 								<?php }?>
 							<?php }?>
-						</div>
-						<div class="single-sidebar-widget ads-widget">
-							<a href="#"><img class="img-fluid" src="img/blog/ads-banner.jpg" alt=""></a>
 						</div>
 					</div>
 				</div>
